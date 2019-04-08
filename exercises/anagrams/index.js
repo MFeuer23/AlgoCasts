@@ -9,22 +9,15 @@
 //   anagrams('Hi there', 'Bye there') --> False
 
 function anagrams(stringA, stringB) {
-  let hashmapA = {}
-  let hashmapB = {}
-  let a = stringA.replace(/[^\w]/g, "").toLowerCase();
-  let b = stringB.replace(/[^\w]/g, "").toLowerCase();
+  let hashmapA = buildHashmap(stringA)
+  let hashmapB = buildHashmap(stringB)
 
-  if (a.length !== b.length) {
+  if (Object.keys(hashmapA).length !== Object.keys(hashmapB).length) {
     return false
   }
 
-  for (i = 0; i < a.length; i++) {
-     hashmapA[a[i]] = hashmapA[a[i]] + 1 || 1;
-     hashmapB[b[i]] = hashmapB[b[i]] + 1 || 1;
-  }
-
-  for (key in hashmapA) {
-    if (!hashmapB[key] || hashmapB[key] !== hashmapA[key]) {
+  for (let key in hashmapA) {
+    if (hashmapA[key] !== hashmapB[key]) {
       return false
     }
   }
@@ -32,4 +25,38 @@ function anagrams(stringA, stringB) {
   return true
 }
 
+// Helper function
+function buildHashmap(str) {
+  const hashmap = {};
+  for (let char of str.replace(/[^\w]/g, '').toLowerCase()) {
+    hashmap[char] = hashmap[char] + 1 || 1
+  }
+  return hashmap
+}
+
 module.exports = anagrams;
+
+// ALTERNATE SOLUTION
+// function anagrams(stringA, stringB) {
+//   let hashmapA = {}
+//   let hashmapB = {}
+//   let a = stringA.replace(/[^\w]/g, "").toLowerCase();
+//   let b = stringB.replace(/[^\w]/g, "").toLowerCase();
+//
+//   if (a.length !== b.length) {
+//     return false
+//   }
+//
+//   for (i = 0; i < a.length; i++) {
+//      hashmapA[a[i]] = hashmapA[a[i]] + 1 || 1;
+//      hashmapB[b[i]] = hashmapB[b[i]] + 1 || 1;
+//   }
+//
+//   for (key in hashmapA) {
+//     if (!hashmapB[key] || hashmapB[key] !== hashmapA[key]) {
+//       return false
+//     }
+//   }
+//
+//   return true
+// }
