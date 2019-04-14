@@ -9,30 +9,14 @@
 //   anagrams('Hi there', 'Bye there') --> False
 
 function anagrams(stringA, stringB) {
-  let hashmapA = buildHashmap(stringA)
-  let hashmapB = buildHashmap(stringB)
-
-  if (Object.keys(hashmapA).length !== Object.keys(hashmapB).length) {
-    return false
-  }
-
-  for (let key in hashmapA) {
-    if (hashmapA[key] !== hashmapB[key]) {
-      return false
-    }
-  }
-
-  return true
+  return clean(stringA) === clean(stringB);
 }
 
-// Helper function
-function buildHashmap(str) {
-  const hashmap = {};
-  for (let char of str.replace(/[^\w]/g, '').toLowerCase()) {
-    hashmap[char] = hashmap[char] + 1 || 1
-  }
-  return hashmap
+//helper function
+function clean(str) {
+  return str.replace(/[^\w]/g, '').toLowerCase().split('').sort().join('');
 }
+
 
 module.exports = anagrams;
 
@@ -59,4 +43,31 @@ module.exports = anagrams;
 //   }
 //
 //   return true
+// }
+
+// ALTERNATE SOLUTION with HELPER function
+// function anagrams(stringA, stringB) {
+//   let hashmapA = buildHashmap(stringA)
+//   let hashmapB = buildHashmap(stringB)
+//
+//   if (Object.keys(hashmapA).length !== Object.keys(hashmapB).length) {
+//     return false
+//   }
+//
+//   for (let key in hashmapA) {
+//     if (hashmapA[key] !== hashmapB[key]) {
+//       return false
+//     }
+//   }
+//
+//   return true
+// }
+//
+// // Helper function
+// function buildHashmap(str) {
+//   const hashmap = {};
+//   for (let char of str.replace(/[^\w]/g, '').toLowerCase()) {
+//     hashmap[char] = hashmap[char] + 1 || 1
+//   }
+//   return hashmap
 // }
