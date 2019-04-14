@@ -18,14 +18,29 @@
 //       '####'
 
 function steps(n) {
-  let array = []
-  for (let x = 0; x < n; x++) {
-    array.push(' ')
-  }
-  for (let i = 0; i < n; i++) {
-    array.splice(i, 1, '#')
-    console.log(array.join(''))
+  for (let row = 0; row < n; row++) {
+    let stair = ""
+    for (let col = 0; col < n; col++) {
+      if (col <= row) {
+        stair += "#"
+      } else {
+        stair += " "
+      }
+    }
+    console.log(stair);
   }
 }
 
 module.exports = steps;
+
+//ALTERNATE SOLUTION
+// function steps(n) {
+//   let array = []
+//   for (let x = 0; x < n; x++) {
+//     array.push(' ')
+//   }
+//   for (let i = 0; i < n; i++) {
+//     array.splice(i, 1, '#')
+//     console.log(array.join(''))
+//   }
+// }
